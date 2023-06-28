@@ -1,1 +1,1 @@
-# nix-config
+# Nix Configuration

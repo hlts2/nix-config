@@ -26,7 +26,7 @@
     {
       # NixOS (Linux)
       nixosConfigurations = {
-        nixos = nixpkgs.lib.nixosSystem {
+        thinkpad-x1 = nixpkgs.lib.nixosSystem {
           system = systems.linux;
           specialArgs = { inherit inputs username; };
           modules = [

@@ -12,15 +12,17 @@ in
 
     packages = with pkgs; [
       # CLI tools
-      ripgrep
-      fd
-      eza
       bat
+      eza
+      fd
       fzf
       jq
-      yq
+      neovim
+      ripgrep
       tree
       unzip
+      wget
+      yq
       zip
 
       # Development
@@ -31,10 +33,10 @@ in
 
       # Git
       gh
-      lazygit
+	  ghq
     ] ++ lib.optionals isLinux [
       # Linux only
-      gcc
+      # gcc
     ] ++ lib.optionals isDarwin [
       # macOS only
     ];

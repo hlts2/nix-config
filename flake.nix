@@ -17,13 +17,10 @@
 
   outputs = { self, nixpkgs, home-manager, nix-darwin, ... }@inputs:
     let
-      # サポートするシステム
       systems = {
         linux = "x86_64-linux";
         darwin = "aarch64-darwin"; # Apple Silicon (Intel: x86_64-darwin)
       };
-
-      # ユーザー名
       username = "hlts2";
     in
     {
@@ -33,7 +30,7 @@
           system = systems.linux;
           specialArgs = { inherit inputs username; };
           modules = [
-            ./hosts/nixos/configuration.nix
+            ./hosts/thinkpad-x1/configuration.nix
 
             home-manager.nixosModules.home-manager
             {

@@ -29,7 +29,6 @@
     {
       # NixOS (Linux)
       nixosConfigurations = {
-        # ホスト名は後で実際のものに変更してください
         nixos = nixpkgs.lib.nixosSystem {
           system = systems.linux;
           specialArgs = { inherit inputs username; };
@@ -49,7 +48,6 @@
 
       # macOS (Darwin)
       darwinConfigurations = {
-        # ホスト名は後で実際のものに変更してください
         macbook = nix-darwin.lib.darwinSystem {
           system = systems.darwin;
           specialArgs = { inherit inputs username; };

@@ -30,6 +30,8 @@
 
   # macOS system settings
   system = {
+    primaryUser = username;
+
     defaults = {
       NSGlobalDomain = {
         AppleShowAllExtensions = true;

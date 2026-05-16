@@ -70,6 +70,7 @@
       upgrade = true;
     };
     casks = [
+      "google-chrome"
       "orbstack"
       "tailscale"
     ];

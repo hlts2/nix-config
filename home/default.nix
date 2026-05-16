@@ -17,7 +17,6 @@ in
       fd
       fzf
       jq
-      neovim
       ripgrep
       tree
       unzip

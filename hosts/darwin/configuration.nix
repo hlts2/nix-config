@@ -1,18 +1,9 @@
 { config, pkgs, inputs, username, ... }:
 
 {
-  # Nix settings
-  nix = {
-    settings = {
-      experimental-features = [ "nix-command" "flakes" ];
-      auto-optimise-store = true;
-    };
-    gc = {
-      automatic = true;
-      interval = { Weekday = 0; Hour = 2; Minute = 0; };
-      options = "--delete-older-than 7d";
-    };
-  };
+  # Nix is managed by Determinate Systems installer, not nix-darwin.
+  # Settings (experimental-features, gc, etc.) are configured via Determinate.
+  nix.enable = false;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;

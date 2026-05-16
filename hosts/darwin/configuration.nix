@@ -63,6 +63,7 @@
     };
     casks = [
       "google-chrome"
+      "ollama"
       "orbstack"
       "tailscale"
     ];

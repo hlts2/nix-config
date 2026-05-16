@@ -45,7 +45,7 @@
 
       # macOS (Darwin)
       darwinConfigurations = {
-        macbook = nix-darwin.lib.darwinSystem {
+        macmini = nix-darwin.lib.darwinSystem {
           system = systems.darwin;
           specialArgs = { inherit inputs username; };
           modules = [

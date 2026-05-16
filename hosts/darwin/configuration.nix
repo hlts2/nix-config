@@ -19,7 +19,7 @@
 
   # System packages
   environment.systemPackages = with pkgs; [
-    vim
+    neovim
     git
     curl
     wget
@@ -61,16 +61,19 @@
     stateVersion = 5;
   };
 
-  # Homebrew (optional, for GUI apps not in nixpkgs)
-  # homebrew = {
-  #   enable = true;
-  #   onActivation.cleanup = "zap";
-  #   casks = [
-  #     "google-chrome"
-  #     "slack"
-  #     "discord"
-  #   ];
-  # };
+  # Homebrew (for GUI apps and macOS-native tools not in nixpkgs)
+  homebrew = {
+    enable = true;
+    onActivation = {
+      autoUpdate = true;
+      cleanup = "zap";
+      upgrade = true;
+    };
+    casks = [
+      "orbstack"
+      "tailscale"
+    ];
+  };
 
   # User configuration
   users.users.${username} = {

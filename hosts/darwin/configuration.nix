@@ -61,6 +61,9 @@
       cleanup = "zap";
       upgrade = true;
     };
+	brews = [
+      "tailscale"
+	];
     casks = [
       "google-chrome"
       "ollama"

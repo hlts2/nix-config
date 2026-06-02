@@ -68,7 +68,7 @@
       "google-chrome"
       "ollama"
       "orbstack"
-      "tailscale"
+      "tailscale-app"
     ];
   };
 

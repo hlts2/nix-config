@@ -60,7 +60,6 @@
       NSGlobalDomain = {
         AppleShowAllExtensions = true;
         AppleInterfaceStyle = "Dark";
-        # キーリピート設定
         KeyRepeat = 2;
         InitialKeyRepeat = 15;
       };

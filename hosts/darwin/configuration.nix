@@ -62,6 +62,15 @@
         Clicking = true;
         TrackpadRightClick = true;
       };
+
+      # Headless auto-login so user-session daemons (OrbStack) return after reboot.
+      loginwindow.autoLoginUser = username;
+
+      # A physically-attached monitor must hit a locked screen.
+      screensaver = {
+        askForPassword = true;
+        askForPasswordDelay = 0;
+      };
     };
 
     # macOS version

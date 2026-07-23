@@ -29,6 +29,19 @@
     computerName = "macmini";
   };
 
+  # Auto-login starts the user session (so OrbStack containers recover
+  # unattended), but immediately drop to the login window so no unlocked
+  # desktop is ever exposed on the console. The session keeps running underneath.
+  launchd.user.agents.lock-on-login = {
+    serviceConfig = {
+      ProgramArguments = [
+        "/System/Library/CoreServices/Menu Extras/User.menu/Contents/Resources/CGSession"
+        "-suspend"
+      ];
+      RunAtLoad = true;
+    };
+  };
+
   # System packages
   environment.systemPackages = with pkgs; [
     git

@@ -67,6 +67,21 @@ system.defaults.screensaver = {
 
 - `autoLoginUser` writes the loginwindow plist key. **macOS limitation:** nix-darwin cannot write the encrypted password blob (`/etc/kcpassword`). A one-time manual toggle of "Automatically log in as…" in System Settings → Users & Groups is required after the first switch. Documented here as a manual step; not achievable declaratively.
 - `screensaver.askForPassword` + `askForPasswordDelay = 0` mean a physically-attached monitor lands on a password-locked screen while the session keeps running underneath. This is what reconciles "auto-login for reliability" with "don't let anyone use the desktop."
+- **Lock immediately after auto-login.** `screensaver.askForPassword` only locks once the display sleeps/screensaver engages, leaving the desktop exposed for up to the display-sleep interval right after boot. To close that window, a per-user LaunchAgent drops the session to the login window as soon as it loads, so the console is locked from the moment it boots while OrbStack keeps starting underneath:
+
+  ```nix
+  launchd.user.agents.lock-on-login = {
+    serviceConfig = {
+      ProgramArguments = [
+        "/System/Library/CoreServices/Menu Extras/User.menu/Contents/Resources/CGSession"
+        "-suspend"
+      ];
+      RunAtLoad = true;
+    };
+  };
+  ```
+
+  FileVault must be OFF for unattended power-failure recovery and auto-login to work (it would otherwise block boot on the disk-unlock prompt); at-rest disk encryption is traded for headless availability.
 
 ### D. Clean network identity
 

@@ -99,9 +99,11 @@ Plus the remaining `com.apple.SoftwareUpdate` keys (automatic check, download, c
 
 ## Non-nix manual steps (documented, not encoded)
 
-1. System Settings → toggle "Automatically log in as hlts2" once (writes `/etc/kcpassword`).
-2. `sudo tailscale up` once to authenticate the Tailscale node.
-3. OrbStack → enable "Start at login" so containers with a restart policy come up after reboot.
+1. Turn FileVault **off** (System Settings → Privacy & Security → FileVault). Required so unattended power-failure recovery and auto-login work — FileVault would otherwise block boot on the disk-unlock prompt. Trades at-rest disk encryption for headless availability.
+2. System Settings → toggle "Automatically log in as hlts2" once (writes `/etc/kcpassword`).
+3. System Settings → Lock Screen → "Require password after screen saver begins or display is turned off" → **Immediately**. On current macOS the `screensaver.askForPassword` default is ignored (Apple moved it to a protected setting), so this must be set by hand; without it the lock-on-login agent sleeps the display but the console wakes without a password.
+4. `sudo tailscale up` once to authenticate the Tailscale node.
+5. OrbStack → enable "Start at login" so containers with a restart policy come up after reboot.
 
 ## What is intentionally NOT changed
 

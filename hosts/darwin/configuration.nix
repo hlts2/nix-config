@@ -8,6 +8,40 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  # Server power behavior: never sleep, recover unattended.
+  power = {
+    restartAfterFreeze = true;
+    restartAfterPowerFailure = true;
+    sleep = {
+      computer = "never";
+      display = 10;
+      harddisk = "never";
+    };
+  };
+
+  # Remote access for a headless server.
+  services.openssh.enable = true;
+  services.tailscale.enable = true;
+
+  # Stable identity for SSH / Bonjour.
+  networking = {
+    hostName = "macmini";
+    computerName = "macmini";
+  };
+
+  # Auto-login starts the user session (so OrbStack containers recover
+  # unattended), but immediately sleep the display at session load. Combined
+  # with screensaver.askForPassword (delay 0), waking the console requires the
+  # password, so no unlocked desktop is ever exposed. The session keeps running
+  # underneath. (pmset is used instead of the old CGSession lock, whose
+  # /System/.../User.menu binary no longer exists on current macOS.)
+  launchd.user.agents.lock-on-login = {
+    serviceConfig = {
+      ProgramArguments = [ "/usr/bin/pmset" "displaysleepnow" ];
+      RunAtLoad = true;
+    };
+  };
+
   # System packages
   environment.systemPackages = with pkgs; [
     git
@@ -47,6 +81,36 @@
         Clicking = true;
         TrackpadRightClick = true;
       };
+
+      # Headless auto-login so user-session daemons (OrbStack) return after reboot.
+      loginwindow.autoLoginUser = username;
+
+      # Best-effort: require a password on wake so a physically-attached
+      # monitor hits a locked screen. NOTE: on current macOS this is written
+      # to the global com.apple.screensaver domain, which the OS ignores for
+      # the lock behaviour (nix-darwin #908/#1207); neither the global nor the
+      # per-user ByHost write is honoured here. The actual "require password
+      # immediately" must be set once by hand in System Settings -> Lock Screen
+      # (documented in the design spec). Combined with lock-on-login below,
+      # that manual setting locks the console at boot. Kept declaratively for
+      # other/older macOS where it does take effect.
+      screensaver = {
+        askForPassword = true;
+        askForPasswordDelay = 0;
+      };
+
+      # Full automatic updates (OS + security + App Store). Reboots recover via auto-login.
+      SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
+
+      CustomSystemPreferences = {
+        "com.apple.SoftwareUpdate" = {
+          AutomaticCheckEnabled = true;
+          AutomaticDownload = 1;
+          CriticalUpdateInstall = 1;
+          ConfigDataInstall = 1;
+        };
+        "com.apple.commerce".AutoUpdate = true;
+      };
     };
 
     # macOS version
@@ -61,9 +125,6 @@
       cleanup = "zap";
       upgrade = true;
     };
-	brews = [
-      "tailscale"
-	];
     casks = [
       "google-chrome"
       "ollama"

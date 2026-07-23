@@ -30,14 +30,14 @@
   };
 
   # Auto-login starts the user session (so OrbStack containers recover
-  # unattended), but immediately drop to the login window so no unlocked
-  # desktop is ever exposed on the console. The session keeps running underneath.
+  # unattended), but immediately sleep the display at session load. Combined
+  # with screensaver.askForPassword (delay 0), waking the console requires the
+  # password, so no unlocked desktop is ever exposed. The session keeps running
+  # underneath. (pmset is used instead of the old CGSession lock, whose
+  # /System/.../User.menu binary no longer exists on current macOS.)
   launchd.user.agents.lock-on-login = {
     serviceConfig = {
-      ProgramArguments = [
-        "/System/Library/CoreServices/Menu Extras/User.menu/Contents/Resources/CGSession"
-        "-suspend"
-      ];
+      ProgramArguments = [ "/usr/bin/pmset" "displaysleepnow" ];
       RunAtLoad = true;
     };
   };

@@ -85,7 +85,15 @@
       # Headless auto-login so user-session daemons (OrbStack) return after reboot.
       loginwindow.autoLoginUser = username;
 
-      # A physically-attached monitor must hit a locked screen.
+      # Best-effort: require a password on wake so a physically-attached
+      # monitor hits a locked screen. NOTE: on current macOS this is written
+      # to the global com.apple.screensaver domain, which the OS ignores for
+      # the lock behaviour (nix-darwin #908/#1207); neither the global nor the
+      # per-user ByHost write is honoured here. The actual "require password
+      # immediately" must be set once by hand in System Settings -> Lock Screen
+      # (documented in the design spec). Combined with lock-on-login below,
+      # that manual setting locks the console at boot. Kept declaratively for
+      # other/older macOS where it does take effect.
       screensaver = {
         askForPassword = true;
         askForPasswordDelay = 0;

@@ -23,6 +23,12 @@
   services.openssh.enable = true;
   services.tailscale.enable = true;
 
+  # Stable identity for SSH / Bonjour.
+  networking = {
+    hostName = "macmini";
+    computerName = "macmini";
+  };
+
   # System packages
   environment.systemPackages = with pkgs; [
     git

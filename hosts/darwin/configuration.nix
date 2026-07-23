@@ -8,6 +8,17 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  # Server power behavior: never sleep, recover unattended.
+  power = {
+    restartAfterFreeze = true;
+    restartAfterPowerFailure = true;
+    sleep = {
+      computer = "never";
+      display = 10;
+      harddisk = "never";
+    };
+  };
+
   # System packages
   environment.systemPackages = with pkgs; [
     git

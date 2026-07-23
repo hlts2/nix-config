@@ -77,6 +77,19 @@
         askForPassword = true;
         askForPasswordDelay = 0;
       };
+
+      # Full automatic updates (OS + security + App Store). Reboots recover via auto-login.
+      SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
+
+      CustomSystemPreferences = {
+        "com.apple.SoftwareUpdate" = {
+          AutomaticCheckEnabled = true;
+          AutomaticDownload = 1;
+          CriticalUpdateInstall = 1;
+          ConfigDataInstall = 1;
+        };
+        "com.apple.commerce".AutoUpdate = true;
+      };
     };
 
     # macOS version

@@ -19,6 +19,10 @@
     };
   };
 
+  # Remote access for a headless server.
+  services.openssh.enable = true;
+  services.tailscale.enable = true;
+
   # System packages
   environment.systemPackages = with pkgs; [
     git
@@ -72,9 +76,6 @@
       cleanup = "zap";
       upgrade = true;
     };
-	brews = [
-      "tailscale"
-	];
     casks = [
       "google-chrome"
       "ollama"

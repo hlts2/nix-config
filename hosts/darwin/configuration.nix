@@ -1,4 +1,10 @@
-{ config, pkgs, inputs, username, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  username,
+  ...
+}:
 
 {
   # Nix is managed by Determinate Systems installer, not nix-darwin.
@@ -37,7 +43,10 @@
   # /System/.../User.menu binary no longer exists on current macOS.)
   launchd.user.agents.lock-on-login = {
     serviceConfig = {
-      ProgramArguments = [ "/usr/bin/pmset" "displaysleepnow" ];
+      ProgramArguments = [
+        "/usr/bin/pmset"
+        "displaysleepnow"
+      ];
       RunAtLoad = true;
     };
   };

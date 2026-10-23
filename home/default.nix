@@ -1,4 +1,11 @@
-{ config, pkgs, lib, inputs, username, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  username,
+  ...
+}:
 
 let
   isDarwin = pkgs.stdenv.isDarwin;
@@ -10,35 +17,39 @@ in
     homeDirectory = if isDarwin then "/Users/${username}" else "/home/${username}";
     stateVersion = "24.11";
 
-    packages = with pkgs; [
-      # CLI tools
-      bat
-      eza
-      fd
-      fzf
-      jq
-      ripgrep
-      tree
-      unzip
-      wget
-      yq
-      zip
+    packages =
+      with pkgs;
+      [
+        # CLI tools
+        bat
+        eza
+        fd
+        fzf
+        jq
+        ripgrep
+        tree
+        unzip
+        wget
+        yq
+        zip
 
-      # Development
-      gnumake
-      go
-      rustup
-      nodejs
+        # Development
+        gnumake
+        go
+        rustup
+        nodejs
 
-      # Git
-      gh
-	  ghq
-    ] ++ lib.optionals isLinux [
-      # Linux only
-      # gcc
-    ] ++ lib.optionals isDarwin [
-      # macOS only
-    ];
+        # Git
+        gh
+        ghq
+      ]
+      ++ lib.optionals isLinux [
+        # Linux only
+        # gcc
+      ]
+      ++ lib.optionals isDarwin [
+        # macOS only
+      ];
   };
 
   # Let Home Manager manage itself
@@ -47,9 +58,11 @@ in
   # Git
   programs.git = {
     enable = true;
-    userName = "hlts2";
-    userEmail = "hiroto.funakoshi.hiroto@gmail.com";
-    extraConfig = {
+    settings = {
+      user = {
+        name = "hlts2";
+        email = "hiroto.funakoshi.hiroto@gmail.com";
+      };
       init.defaultBranch = "main";
       pull.rebase = true;
       push.autoSetupRemote = true;

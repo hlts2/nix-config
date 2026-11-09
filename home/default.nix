@@ -49,6 +49,7 @@ in
       ]
       ++ lib.optionals isDarwin [
         # macOS only
+        tart
       ];
   };
 

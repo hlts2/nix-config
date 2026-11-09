@@ -26,7 +26,14 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, nix-darwin, ... }@inputs:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      nix-darwin,
+      ...
+    }@inputs:
     let
       systems = {
         linux = "x86_64-linux";
@@ -76,9 +83,12 @@
               };
             }
             # Keep the Brewfile taps in sync so `brew bundle cleanup` never untaps Nix-managed taps
-            ({ config, ... }: {
-              homebrew.taps = builtins.attrNames config.nix-homebrew.taps;
-            })
+            (
+              { config, ... }:
+              {
+                homebrew.taps = builtins.attrNames config.nix-homebrew.taps;
+              }
+            )
 
             home-manager.darwinModules.home-manager
             {

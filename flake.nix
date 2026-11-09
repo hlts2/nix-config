@@ -75,6 +75,10 @@
                 autoMigrate = true;
               };
             }
+            # Keep the Brewfile taps in sync so `brew bundle cleanup` never untaps Nix-managed taps
+            ({ config, ... }: {
+              homebrew.taps = builtins.attrNames config.nix-homebrew.taps;
+            })
 
             home-manager.darwinModules.home-manager
             {

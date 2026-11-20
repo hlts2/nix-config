@@ -134,7 +134,7 @@
       upgrade = true;
     };
     casks = [
-      "google-chrome"
+      # "google-chrome"
       # "orbstack"
     ];
   };

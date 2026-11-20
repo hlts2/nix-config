@@ -131,7 +131,7 @@ in
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
-    historyWidgetOptions = "";
+    historyWidgetOptions = [ ];
   };
 
   # Neovim

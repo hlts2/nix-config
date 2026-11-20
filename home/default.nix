@@ -37,7 +37,6 @@ in
         wget
         yq
         zip
-        zoxide
       ]
       ++ lib.optionals isLinux [
         # Linux only
@@ -88,6 +87,11 @@ in
       ignoreDups = true;
       ignoreSpace = true;
     };
+  };
+
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
   };
 
   # Starship prompt

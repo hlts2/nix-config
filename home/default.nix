@@ -96,10 +96,10 @@ in
     ];
 
     initContent = ''
-      [[ -f "$HOME/.p10k.zsh" ]] && source "$HOME/.p10k.zsh"
+      [[ -f "$HOME/.zsh/.p10k.zsh" ]] && source "$HOME/.zsh/.p10k.zsh"
     '';
   };
-  home.file.".p10k.zsh".source = ./zsh/p10k.zsh;
+  home.file.".zsh/.p10k.zsh".source = ./zsh/p10k.zsh;
 
   # Zoxide
   programs.zoxide = {

@@ -86,7 +86,20 @@ in
       ignoreDups = true;
       ignoreSpace = true;
     };
+
+    plugins = [
+      {
+        name = "powerlevel10k";
+        src = pkgs.zsh-powerlevel10k;
+        file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+      }
+    ];
+
+    initContent = ''
+      	[[ -f "$HOME/.p10k.zsh "]] && source "$HOME/.p10k.zsh"
+    '';
   };
+  home.file.".p10k.zsh".source = ./zsh/p10k.zsh;
 
   # Zoxide
   programs.zoxide = {
@@ -96,12 +109,6 @@ in
 
   # Fzf
   programs.fzf = {
-    enable = true;
-    enableZshIntegration = true;
-  };
-
-  # Starship prompt
-  programs.starship = {
     enable = true;
     enableZshIntegration = true;
   };

@@ -74,7 +74,6 @@ in
     shellAliases = {
       ls = "ls -G";
       mkdir = "mkdir -p";
-      vim = "nvim";
       grep = "grep --color";
       ".." = "cd ../";
       "..." = "cd ../..";

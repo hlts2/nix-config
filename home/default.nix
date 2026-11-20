@@ -96,7 +96,7 @@ in
     ];
 
     initContent = ''
-      	[[ -f "$HOME/.p10k.zsh "]] && source "$HOME/.p10k.zsh"
+      [[ -f "$HOME/.p10k.zsh" ]] && source "$HOME/.p10k.zsh"
     '';
   };
   home.file.".p10k.zsh".source = ./zsh/p10k.zsh;

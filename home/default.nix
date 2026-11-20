@@ -158,4 +158,78 @@ in
     enableZshIntegration = true;
     nix-direnv.enable = true;
   };
+
+  # Ghostty
+  programs.ghostty = {
+    enable = true;
+    enableZshIntegration = true;
+
+    settings = {
+      # Window
+      title = " ";
+      background-opacity = 0.8;
+      window-padding-x = 8;
+      window-padding-y = 4;
+      window-width = 128;
+      window-height = 30;
+      confirm-close-surface = true;
+
+      # Scrollback
+      scrollback-limit = 100000;
+
+      # Clipboard
+      copy-on-select = "clipboard";
+
+      # Cursor
+      cursor-style = "block";
+      cursor-style-blink = false;
+      shell-integration-features = "no-cursor";
+
+      # Notification
+      desktop-notifications = true;
+
+      # Font
+      font-family = "HackGen Console NF";
+      font-size = 10;
+
+      # Input
+      mouse-hide-while-typing = true;
+
+      # Keybindings
+      keybind = [
+        "alt+c=copy_to_clipboard"
+        "alt+v=paste_from_clipboard"
+        "alt+semicolon=increase_font_size:1"
+        "alt+shift+minus=decrease_font_size:1"
+        "alt+enter=new_window"
+        "alt+n=new_tab"
+      ];
+
+      # Colors (iceberg theme)
+      background = "#161821";
+      foreground = "#d2d4de";
+
+      # Normal colors
+      palette = [
+        "0=#161821"
+        "1=#e27878"
+        "2=#b4be82"
+        "3=#e2a478"
+        "4=#84a0c6"
+        "5=#a093c7"
+        "6=#89b8c2"
+        "7=#c6c8d1"
+
+        # Bright colors
+        "8=#6b7089"
+        "9=#e98989"
+        "10=#c0ca8e"
+        "11=#e9b189"
+        "12=#91acd1"
+        "13=#ada0d3"
+        "14=#95c4ce"
+        "15=#d2d4de"
+      ];
+    };
+  };
 }

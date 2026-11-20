@@ -103,6 +103,24 @@ in
   };
   home.file.".zsh/.p10k.zsh".source = ./zsh/p10k.zsh;
 
+  # Atuin
+  programs.atuin = {
+    enable = true;
+    enableZshIntegration = true;
+    settings = {
+      auto_sync = true;
+      search_mode = "fulltext";
+      workspaces = true;
+      style = "full";
+      inline_height = 25;
+      show_preview = true;
+      secrets_filter = true;
+      enter_accept = false;
+      sync.records = true;
+      tmux.enabled = true;
+    };
+  };
+
   # Zoxide
   programs.zoxide = {
     enable = true;

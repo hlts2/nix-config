@@ -25,7 +25,6 @@ in
         dust
         eza
         fd
-        fzf
         gh
         ghq
         gnumake
@@ -89,7 +88,14 @@ in
     };
   };
 
+  # Zoxide
   programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
+  # Fzf
+  programs.fzf = {
     enable = true;
     enableZshIntegration = true;
   };

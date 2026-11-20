@@ -41,6 +41,7 @@ in
       ++ lib.optionals isLinux [
         # Linux only
         # gcc
+        ghostty
       ]
       ++ lib.optionals isDarwin [
         # macOS only
@@ -163,6 +164,7 @@ in
   programs.ghostty = {
     enable = true;
     enableZshIntegration = true;
+    package = null;
 
     settings = {
       # Window

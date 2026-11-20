@@ -136,6 +136,7 @@
     casks = [
       # "google-chrome"
       # "orbstack"
+      "ghostty"
     ];
   };
 

@@ -135,7 +135,7 @@
     };
     casks = [
       "google-chrome"
-      "orbstack"
+      # "orbstack"
     ];
   };
 

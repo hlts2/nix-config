@@ -20,28 +20,24 @@ in
     packages =
       with pkgs;
       [
-        # CLI tools
         bat
+        duf
+        dust
         eza
         fd
         fzf
+        gh
+        ghq
+        gnumake
         jq
+        procs
         ripgrep
         tree
         unzip
         wget
         yq
         zip
-
-        # Development
-        gnumake
-        go
-        rustup
-        nodejs
-
-        # Git
-        gh
-        ghq
+        zoxide
       ]
       ++ lib.optionals isLinux [
         # Linux only

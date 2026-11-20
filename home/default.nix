@@ -36,6 +36,7 @@ in
         wget
         yq
         zip
+        zsh-completions
       ]
       ++ lib.optionals isLinux [
         # Linux only
@@ -71,6 +72,7 @@ in
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
+    historySubstringSearch.enable = true;
 
     shellAliases = {
       ls = "ls -G";

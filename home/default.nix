@@ -31,6 +31,7 @@ in
         jq
         procs
         ripgrep
+        tig
         tree
         unzip
         wget

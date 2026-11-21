@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   inputs,
   username,
   ...
@@ -148,4 +149,11 @@
 
   # Security
   security.pam.services.sudo_local.touchIdAuth = true;
+
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
+    builtins.elem (lib.getName pkg) [
+      "1password-cli"
+    ];
+  programs._1password.enable = true;
 }
